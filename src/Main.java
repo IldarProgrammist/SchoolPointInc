@@ -1,5 +1,7 @@
 import Models.Student;
 import Models.StudentCRUD;
+import Models.Teacher;
+import Models.TeacherCRUD;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,10 +9,16 @@ public class Main {
         Student student2 = new Student("2","Иванов", "Петр", "Иванович");
         Student student3 = new Student("3","Сидоров", "Иван", "Александрович");
 
+        Teacher teacher = new Teacher("1","Сидоров", "Владимир", "Иванович");
+        Teacher teacher2 = new Teacher("1","Петрова", "Анна", "Петровна");
+
+
         StudentCRUD studentCRUD = new StudentCRUD();
-        studentCRUD.createStudent(student);
-        studentCRUD.createStudent(student2);
-        studentCRUD.createStudent(student3);
+        studentCRUD.create(student);
+        studentCRUD.create(student2);
+        studentCRUD.create(student3);
+
+        System.out.println("Ученики");
 
         System.out.println("Фамилия: "+ student.getFirstName());
         System.out.println("Имя: "+ student.getLastName());
@@ -28,9 +36,17 @@ public class Main {
         System.out.println("Имя: "+ student3.getLastName());
         System.out.println("Отчество: "+ student3.getPatronymic());
 
-        studentCRUD.deleteStudent(student2);
+        studentCRUD.delete(student2);
 
         System.out.println("**************************************");
         System.out.println("Удален ученик " + student2.getFirstName()+" " + student2.getLastName());
+
+        System.out.println("********************************************************************");
+        System.out.println("Учителя");
+
+        TeacherCRUD teacherCRUD = new TeacherCRUD();
+        teacherCRUD.create(teacher);
+        System.out.println("Фамилия: "+ teacher.getFirstName() + " " + teacher.getLastName());
+        System.out.println("Фамилия: "+ teacher2.getFirstName() + " " + teacher2.getLastName());
     }
 }
