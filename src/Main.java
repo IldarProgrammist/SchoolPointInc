@@ -1,52 +1,51 @@
 import Models.Student;
-import Models.StudentCRUD;
 import Models.Teacher;
-import Models.TeacherCRUD;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
-        Student student = new Student("1","Петров", "Петр", "Петрович");
+        Student student = new Student("1","Петров","Петр", "Петрович");
         Student student2 = new Student("2","Иванов", "Петр", "Иванович");
         Student student3 = new Student("3","Сидоров", "Иван", "Александрович");
 
         Teacher teacher = new Teacher("1","Сидоров", "Владимир", "Иванович");
         Teacher teacher2 = new Teacher("1","Петрова", "Анна", "Петровна");
+        Teacher teacher3 = new Teacher("1","Петрова", "Анна", "Петровна");
+
+       /* System.out.println(student);
+        System.out.println(student2);
+        System.out.println(student3);
+        */
+
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(student);
+        studentList.add(student2);
+        studentList.add(student3);
 
 
-        StudentCRUD studentCRUD = new StudentCRUD();
-        studentCRUD.create(student);
-        studentCRUD.create(student2);
-        studentCRUD.create(student3);
+        for (Student s : studentList) {
+            System.out.println(s.toString());
+        }
 
-        System.out.println("Ученики");
+//        System.out.println("Проверка равенства объектов");
+//        System.out.println("Проверка при помощи == ");
+//        System.out.println(student == student2);
+//        System.out.println("Проверка при помощи equals ");
+//        System.out.println(student.equals(student4));
 
-        System.out.println("Фамилия: "+ student.getFirstName());
-        System.out.println("Имя: "+ student.getLastName());
-        System.out.println("Отчество: "+ student.getPatronymic());
 
-        System.out.println("**************************************");
+//        System.out.println("HashCode for student: "+ student.hashCode());
+//        System.out.println("HashCode for student2: "+student2.hashCode());
+//        System.out.println("HashCode for student3: "+student3.hashCode());
 
-        System.out.println("Фамилия: "+ student2.getFirstName());
-        System.out.println("Имя: "+ student2.getLastName());
-        System.out.println("Отчество: "+ student2.getPatronymic());
 
-        System.out.println("**************************************");
+        // String srt = "123";
+        //String srt2 = "123";
 
-        System.out.println("Фамилия: "+ student3.getFirstName());
-        System.out.println("Имя: "+ student3.getLastName());
-        System.out.println("Отчество: "+ student3.getPatronymic());
-
-        studentCRUD.delete(student2);
-
-        System.out.println("**************************************");
-        System.out.println("Удален ученик " + student2.getFirstName()+" " + student2.getLastName());
-
-        System.out.println("********************************************************************");
-        System.out.println("Учителя");
-
-        TeacherCRUD teacherCRUD = new TeacherCRUD();
-        teacherCRUD.create(teacher);
-        System.out.println("Фамилия: "+ teacher.getFirstName() + " " + teacher.getLastName());
-        System.out.println("Фамилия: "+ teacher2.getFirstName() + " " + teacher2.getLastName());
+        // System.out.println( srt.equals(srt2));
+        // srt = srt2;
     }
 }
