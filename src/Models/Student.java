@@ -1,4 +1,5 @@
 package Models;
+
 public class Student extends Person {
 
     public Student(int studentId, String firstName, String lastName, String patronymic) {
@@ -6,9 +7,9 @@ public class Student extends Person {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ID: ").append(getStudentId()).append(" ");
+        sb.append("ID: ").append(getPersonId()).append(" ");
         sb.append("Фамилия: ").append(getFirstName()).append(" ");
         sb.append("Имя: ").append(getLastName()).append(" ");
         sb.append("Отчество: ").append(getPatronymic()).append(" ");
@@ -20,12 +21,12 @@ public class Student extends Person {
     @Override
     public boolean equals(Object obj) {
         Student student = (Student) obj;
-        return (this.getStudentId() == student.getStudentId());
+        return (this.getPersonId() == student.getPersonId());
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(getStudentId());
+        return Integer.hashCode(getPersonId());
     }
 }
 

@@ -3,7 +3,7 @@ package Models;
 import java.util.Date;
 
 public abstract class Person {
-    private int StudentId;
+    private int personId;
     private String firstName;
     private String lastName;
     private String  patronymic;
@@ -13,17 +13,17 @@ public abstract class Person {
     }
 
     public Person(int studentId, String firstName, String lastName, String patronymic) {
-        this.StudentId = studentId;
+        this.personId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
     }
 
-    public int getStudentId() {
-        return StudentId;
+    public int getPersonId() {
+        return personId;
     }
-    public void setStudentId(int studentId) {
-        StudentId = studentId;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
     public Date getDateOfBirth() {
         return dateOfBirth;
@@ -58,4 +58,5 @@ public abstract class Person {
     }
 
     private Date dateOfBirth;
+
 }
