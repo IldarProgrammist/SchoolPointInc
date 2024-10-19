@@ -7,7 +7,13 @@ public class Student extends Person {
 
     @Override
     public String toString(){
-        return "Id:" +" "+ getStudentId()+ " "+"Имя: "+ getLastName() + " " + "Фамилия:  " + getFirstName();
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID: ").append(getStudentId()).append(" ");
+        sb.append("Фамилия: ").append(getFirstName()).append(" ");
+        sb.append("Имя: ").append(getLastName()).append(" ");
+        sb.append("Отчество: ").append(getPatronymic()).append(" ");
+
+        return sb.toString();
     }
 
 

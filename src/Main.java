@@ -1,61 +1,59 @@
-import Models.Student;
-import Models.Teacher;
+import Models.StudentManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-public class Main {
 
-    public static void main(String[] args) {
-        Student student = new Student(1,"Петров","Петр", "Петрович");
-        Student student2 = new Student(2,"Иванов", "Петр", "Иванович");
-        Student student3 = new Student(3,"Сидоров", "Иван", "Александрович");
+public static void main(String[] args) {
+    StudentManager studentManager = new StudentManager();
+    Scanner scanner = new Scanner(System.in);
+    int choice = 0;
 
-        Teacher teacher = new Teacher(1,"Сидоров", "Владимир", "Иванович");
-        Teacher teacher2 = new Teacher(2,"Петрова", "Анна", "Петровна");
-        Teacher teacher3 = new Teacher(3,"Петрова", "Анна", "Петровна");
 
-       /* System.out.println(student);
-        System.out.println(student2);
-        System.out.println(student3);
-        */
 
-        List<Student> studentList = new ArrayList<>();
-        studentList.add(student);
-        studentList.add(student2);
-        studentList.add(student3);
+    do {
+        System.out.println("\n1. Добавить ученика");
+        System.out.println("2. Удалить ученика");
+        System.out.println("3. Показать всех учеников");
+        try {
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1: {
+                    System.out.println("Введите ID: ");
+                    int id = scanner.nextInt();
+                    System.out.println("Введите фамилию ученика: ");
+                    String firstName = scanner.next();
+                    System.out.println("Введите имя ученика: ");
+                    String lastName = scanner.next();
+                    System.out.println("Введите отчество ученика ");
+                    String patronymic = scanner.next();
+                    studentManager.addStudent(id, firstName, lastName, patronymic);
+                    studentManager.printStudents();
+                    break;
+                }
+                case 2:
+                    System.out.println("Введите ID: ");
+                    int id = scanner.nextInt();
+                    studentManager.removeStudent(id);
+                    studentManager.printStudents();
+                    break;
+                case 3:
+                    studentManager.printStudents();
+                    break;
 
-        for (Student s : studentList) {
-           // System.out.println(s.toString());
+                case 4:
+                    System.out.println("Выход из программы");
+                    break;
+                default:
+                    System.out.println("Не верный выбор. Попробуйте снова");
+            }
+        }catch (InputMismatchException e){
+            System.out.println("Ошибка ввода. Пожалуйста попробуйте снова");
+            scanner.next();
+        }catch (Exception e){
+            System.out.println("Произошла ошибка "+ e.getMessage());
         }
 
-        System.out.println("Проверка равенства объектов");
-        System.out.println("Проверка при помощи == ");
-        student = student2;
-        System.out.println(student == student2);
-        System.out.println("Проверка при помощи equals ");
-        System.out.println(student.equals(student2));
-
-
-        //        System.out.println("HashCode for student: "+ student.hashCode());
-//        System.out.println("HashCode for student2: "+student2.hashCode());
-//        System.out.println("HashCode for student3: "+student3.hashCode());
-
-
-        // String srt = "123";
-        //String srt2 = "123";
-
-        // System.out.println( srt.equals(srt2));
-        // srt = srt2;
-
-        /*
-        Map<Integer, Student> studentMap = new HashMap<>();
-        studentMap.put(1, student);
-        studentMap.put(2, student2);
-
-        System.out.println(studentMap.get(2));
-        */
-    }
+    } while (choice != 4);
+    scanner.close();
 }
