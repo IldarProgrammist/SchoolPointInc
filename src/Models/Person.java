@@ -1,36 +1,44 @@
 package Models;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
 
 public abstract class Person {
-    private int StudentId;
+    private int personId;
     private String firstName;
     private String lastName;
     private String  patronymic;
-    private Date birthDate;
+    private LocalDate dateOfBirth;
+    
 
-    public Person(){
-    }
-
-    public Person(int studentId, String firstName, String lastName, String patronymic) {
-        this.StudentId = studentId;
+    public Person(int personId, String firstName, String lastName, String patronymic, LocalDate dateOfBirth ) {
+        this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
-    }
-
-    public int getStudentId() {
-        return StudentId;
-    }
-    public void setStudentId(int studentId) {
-        StudentId = studentId;
-    }
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+
+    }
+
+    public int getPersonId() {
+        return personId;
+    }
+    public void setPersonId(int personId) {
+        this.personId = personId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPatronymic() {
@@ -41,21 +49,21 @@ public abstract class Person {
         this.patronymic = patronymic;
     }
 
-    public String getLastName() {
-        return lastName;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public int getAge() {
+        if (dateOfBirth == null) {
+            throw new IllegalStateException("Дата рождения не может быть null");
+        }
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(dateOfBirth, currentDate);
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        return period.getYears();
     }
-
-    private Date dateOfBirth;
 }
