@@ -18,9 +18,9 @@ public class StudentManager implements IUserManager<Student> {
     public void remove(int id) {
         boolean removed = students.removeIf(student -> student.getPersonId() == id);
         if (removed) {
-            System.out.println("Ученик с ID: " + id + " был удален из базы данных");
+            System.out.println("Ученик с ID: " + id +" был удален из базы данных");
         } else {
-            System.out.println("Студент с ID: " + id + " не найден");
+            System.out.printf("Студент с ID:" +  id + " не найден");
         }
     }
 

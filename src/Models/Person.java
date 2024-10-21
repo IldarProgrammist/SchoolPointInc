@@ -1,5 +1,4 @@
 package Models;
-
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -10,7 +9,6 @@ public abstract class Person {
     private String patronymic;
     private LocalDate dateOfBirth;
 
-    // Конструктор с параметрами
     public Person(int personId, String firstName, String lastName, String patronymic, LocalDate dateOfBirth) {
         this.personId = personId;
         this.firstName = firstName;
