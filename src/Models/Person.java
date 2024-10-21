@@ -1,52 +1,30 @@
 package Models;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
 
 public abstract class Person {
-    private int StudentId;
+    private int personId;
     private String firstName;
     private String lastName;
-    private String  patronymic;
-    private Date birthDate;
+    private String patronymic;
+    private LocalDate dateOfBirth;
 
-    public Person(){
-    }
-
-    public Person(int studentId, String firstName, String lastName, String patronymic) {
-        this.StudentId = studentId;
+    // Конструктор с параметрами
+    public Person(int personId, String firstName, String lastName, String patronymic, LocalDate dateOfBirth) {
+        this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
-    }
-
-    public int getStudentId() {
-        return StudentId;
-    }
-    public void setStudentId(int studentId) {
-        StudentId = studentId;
-    }
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getPatronymic() {
-        return patronymic;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public String getFirstName() {
@@ -54,8 +32,54 @@ public abstract class Person {
     }
 
     public void setFirstName(String firstName) {
+        if (firstName == null) {
+            throw new IllegalArgumentException("Имя не может быть null");
+        }
         this.firstName = firstName;
     }
 
-    private Date dateOfBirth;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        if (lastName == null) {
+            throw new IllegalArgumentException("Фамилия не может быть null");
+        }
+        this.lastName = lastName;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        if (patronymic == null) {
+            throw new IllegalArgumentException("Отчество не может быть null");
+        }
+        this.patronymic = patronymic;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        if (dateOfBirth == null) {
+            throw new IllegalArgumentException("Дата рождения не может быть null");
+        }
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public int getAge() {
+        if (dateOfBirth == null) {
+            throw new IllegalStateException("Дата рождения не может быть null");
+        }
+        LocalDate currentDate = LocalDate.now();
+        if (dateOfBirth.isAfter(currentDate)) {
+            throw new IllegalStateException("Дата рождения не может быть в будущем");
+        }
+        Period period = Period.between(dateOfBirth, currentDate);
+        return period.getYears();
+    }
 }

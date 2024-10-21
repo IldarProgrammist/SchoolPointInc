@@ -1,5 +1,7 @@
 package Models;
 
+import Models.Student.Student;
+
 import java.util.HashSet;
 
 public class StudentManager implements IUserManager<Student> {
@@ -16,7 +18,7 @@ public class StudentManager implements IUserManager<Student> {
 
     @Override
     public void remove(int id) {
-        Student student = new Student(id, null, null, null);
+        Student student = new Student(id, null, null, null, null);
         if (students.remove(student)) {
             System.out.println("Ученик с ID: " + id + " был удален из базы данных");
         } else {
