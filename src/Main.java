@@ -1,7 +1,5 @@
-import Models.Student.Student;
-import Models.Student.StudentManager;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import Models.StudentManager;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -10,6 +8,9 @@ public static void main(String[] args) {
     StudentManager studentManager = new StudentManager();
     Scanner scanner = new Scanner(System.in);
     int choice = 0;
+
+
+
     do {
         System.out.println("\n1. Добавить ученика");
         System.out.println("2. Удалить ученика");
@@ -26,36 +27,31 @@ public static void main(String[] args) {
                     String lastName = scanner.next();
                     System.out.println("Введите отчество ученика ");
                     String patronymic = scanner.next();
-                    System.out.println("Введите дату рождения");
-                    String dateInput = scanner.next();
-
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                    LocalDate dateOfBirth = LocalDate.parse(dateInput, formatter);
-                    Student student = new Student(id, firstName, lastName, patronymic, dateOfBirth);
-                    studentManager.add(student);
-                    studentManager.display();
+                    studentManager.addStudent(id, firstName, lastName, patronymic);
+                    studentManager.printStudents();
                     break;
                 }
                 case 2:
                     System.out.println("Введите ID: ");
                     int id = scanner.nextInt();
-                    studentManager.remove(id);
-                    studentManager.display();
+                    studentManager.removeStudent(id);
+                    studentManager.printStudents();
                     break;
                 case 3:
-                    studentManager.display();
+                    studentManager.printStudents();
                     break;
+
                 case 4:
                     System.out.println("Выход из программы");
                     break;
                 default:
                     System.out.println("Не верный выбор. Попробуйте снова");
             }
-        } catch (InputMismatchException e) {
+        }catch (InputMismatchException e){
             System.out.println("Ошибка ввода. Пожалуйста попробуйте снова");
             scanner.next();
-        } catch (Exception e) {
-            System.out.println("Произошла ошибка " + e.getMessage());
+        }catch (Exception e){
+            System.out.println("Произошла ошибка "+ e.getMessage());
         }
 
     } while (choice != 4);
