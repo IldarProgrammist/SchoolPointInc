@@ -60,14 +60,14 @@ public class StudentConsoleView {
         Student student = new Student(id, firstName, lastName, patronymic, dateOfBirth);
 
         // Добавляем student в список
-        studentManager.add(student);
+        studentManager.create(student);
         studentManager.display(); // Выводим всех студентов
     }
 
     private void removeStudent() {
         System.out.println("Введите ID: ");
         int id = scanner.nextInt();
-        studentManager.remove(id);
+        studentManager.delete(id);
         studentManager.display();
     }
 }
