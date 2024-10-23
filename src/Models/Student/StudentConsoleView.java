@@ -12,9 +12,10 @@ public class StudentConsoleView {
         int choice = 0;
         do {
             System.out.println("\n1. Добавить ученика");
-            System.out.println("2. Удалить ученика");
-            System.out.println("3. Показать всех учеников");
-            System.out.println("4. Выход");
+            System.out.println("2. Обновить данные ученика");
+            System.out.println("3. Удалить ученика");
+            System.out.println("4. Показать всех учеников");
+            System.out.println("5. Выход");
             try {
                 choice = scanner.nextInt();
                 switch (choice) {
@@ -22,12 +23,15 @@ public class StudentConsoleView {
                         addStudent();
                         break;
                     case 2:
-                        removeStudent();
+                        updateStudent();
                         break;
                     case 3:
-                        studentManager.display();
+                        removeStudent();
                         break;
                     case 4:
+                        studentManager.display();
+                        break;
+                    case 5:
                         System.out.println("Выход из программы");
                         break;
                     default:
@@ -62,6 +66,32 @@ public class StudentConsoleView {
         // Добавляем student в список
         studentManager.create(student);
         studentManager.display(); // Выводим всех студентов
+    }
+
+    private void updateStudent(){
+        System.out.println("Введите ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Введите фамилию ученика: ");
+        String firstName = scanner.nextLine();
+        System.out.println("Введите имя ученика: ");
+        String lastName = scanner.nextLine();
+        System.out.println("Введите отчество ученика: ");
+        String patronymic = scanner.nextLine();
+        System.out.println("Введите дату рождения (dd.MM.yyyy): ");
+        String dateInput = scanner.nextLine();
+
+
+        LocalDate dateOfBirth = null;
+        if (!dateInput.isEmpty()) {
+            dateOfBirth = LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        }
+        studentManager.update(id,
+                firstName.isEmpty() ? null : firstName,
+                lastName.isEmpty() ? null : lastName,
+                patronymic.isEmpty() ? null : patronymic,
+                dateOfBirth);
+        studentManager.display();
     }
 
     private void removeStudent() {
